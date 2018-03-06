@@ -1,0 +1,86 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+public class List {
+	
+	Node head=null; //Empty list
+	
+	public boolean isEmpty() {
+		return head == null? true: false;
+	}
+	
+	public void InsertAtBegin(Node newNode) {
+		newNode.next = head;
+		head = newNode;
+		
+	}
+	
+	public void InsertAtEnd(Node newNode) {
+		
+		Node temp = head;
+		while (temp.next != null)
+			temp = temp.next;
+		
+		temp.next = newNode;
+		
+	}
+	
+	public void insertAtIndex(Node newNode,int index) {
+		Node temp;
+		Node pre = head;
+		for (int i = 0; i < index-1; i++) {
+			pre.next = pre;
+		}
+		temp = pre.next;
+		newNode.next = temp;
+		pre.next= newNode;
+	}
+	public void DeleteAtBegin() {
+		Node temp=head;
+		head=head.next;
+		temp = null;
+		System.gc();
+		
+	}
+	public void DeleteAtEnd() {
+		Node pre = head;
+		Node temp;
+		while (pre.next.next != null)
+			pre = pre.next;
+		
+		temp = pre.next;
+		pre.next=null;
+		System.gc();
+		
+	}
+	
+	public void PrintList() throws IOException {
+		BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
+		Node temp = head;
+		
+		while (temp != null) {
+			bw.write (temp.toString()+"\n");
+			temp=temp.next;
+			
+		}
+		bw.flush();
+		bw.close();
+	}
+	
+	
+	public static void main(String[] args) throws IOException {
+		
+		List student = new List();
+		student.InsertAtBegin(new Node ("Paula", 22, 561556));
+		student.InsertAtEnd(new Node("camila ", 22,2434));
+		student.InsertAtBegin(new Node("Juan", 23,2345676));
+		student.insertAtIndex(new Node("pepe", 23,2345676), 1);
+		student.DeleteAtBegin();
+		student.DeleteAtEnd();
+		student.PrintList();
+
+		
+	}
+
+}
