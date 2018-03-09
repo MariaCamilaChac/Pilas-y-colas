@@ -1,10 +1,11 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Stack;
 
 public class List {
 	
-	Node head=null; //Empty list
+	public Node head=null; //Empty list
 	
 	public boolean isEmpty() {
 		return head == null? true: false;
@@ -53,6 +54,46 @@ public class List {
 		pre.next=null;
 		System.gc();
 		
+	}
+	
+	public void deleteAtIndex (int index) {
+		Node temp = head;
+		for (int i = 0; i < index -1; i++) {
+			temp = temp.next;
+					
+		}
+		
+		Node toDelete= temp.next;
+		temp.next = toDelete.next;
+		toDelete = null;
+		System.gc();
+	}
+	
+	public void reverse() {
+		
+		Stack tempList = new Stack();
+		Node temp = head;
+		
+		while (temp != null) {
+			tempList.push(temp.clone());
+			temp= temp.next;
+		}
+		
+		head=tempList.head;
+		
+	}
+	
+	public Node quickSort() {
+		
+		List leftSet = new List ();
+		List rightSet =  new List ();
+		
+		Node temp = head;
+		Node pivot = temp;
+		
+		
+		leftSet.InsertAtEnd(pivot);
+		leftSet.InsertAtEnd(rightSet.head);
 	}
 	
 	public void PrintList() throws IOException {
