@@ -17,8 +17,15 @@ public class Node {
 		this.id = id;
 	}
 	
+	
 	public String toString() {
 		return "Name: " + this.name + "\tAge: " + this.age + " \tID " + this.id; 
+	}
+	
+	
+	public Node clone() {
+		Node clone = new Node (this.name, this.age, this.id);
+		return clone;
 	}
 
 }
