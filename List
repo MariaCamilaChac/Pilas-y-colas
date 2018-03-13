@@ -1,3 +1,4 @@
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -20,14 +21,17 @@ public class List {
 	}
 	
 	public void InsertAtEnd(Node newNode) {
+		if (isEmpty()) {
+			head = newNode;
+		}else {
+			Node temp = head;
+			while(temp.next != null) {	
+				temp = temp.next;
+			}
 		
-		Node temp = head;
-		
-		while(temp.next != null) {
-			
-			temp = temp.next;
+			temp.next = newNode;	
+	
 		}
-		temp.next = newNode;	
 	}
 	
 	public void InsertAtInedex(Node newNode , int index){
@@ -116,24 +120,76 @@ public class List {
 		bw.close();
 	}
 	
-	public Node quickSort() {
+	public void quickSort() {
+	
+		if (!isEmpty()) {
 		
-		List leftSet = new List ();
-		List rightSet =  new List ();
+			List leftSet = new List ();
+			List rightSet =  new List ();
+
+			Node temp = head.next;
+			Node pivot = temp;	
 		
-		Node temp = head;
-		Node pivot = temp;	
-		
-		while (temp != null){
-			if ( pivot < temp.next){
-				
-			}
+	
+			while (temp != null){
 			
+				if ( temp.value < pivot.value) //cambiar dependiendo el parametro
+				
+				
+					leftSet.InsertAtEnd(temp.clone());
+		
+				else
+				
+					rightSet.InsertAtEnd(temp.clone());
+				
+				temp = temp.next;
 		}
 		
-		
+		leftSet.quickSort();
+		rightSet.quickSort();
+		pivot.next=rightSet.head;
 		leftSet.InsertAtEnd(pivot);
-		leftSet.InsertAtEnd(rightSet.head);
+		head = leftSet.head;
+		
+	}
+	}
+	
+	public int LenghtList() {
+		
+		int counter =0;
+		Node temp=head;
+		while (temp != null) {
+			counter++;
+			temp=temp.next;
+		}
+		return counter;
+	}
+	
+	
+	public Node getNode(int index) {
+		
+		if(LenghtList()< index)
+			return null;
+		
+		else {
+			Node temp=head;
+			for (int i = 0; i < index; i++) {
+				temp=temp.next;
+				
+			}
+			return temp;
+			
+		}
+	
+	}
+	
+	public Node binarySearch() {
+		int max = LenghtList(),min =0:
+		int middle = (max + min)/2;
+		
+		while () {
+			
+		}
 	}
 
 	
