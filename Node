@@ -1,4 +1,3 @@
-
 public class Node {
 	
 	//Student
@@ -7,6 +6,8 @@ public class Node {
 	public int id;
 	
 	public Node next; //pointer
+	public int value;
+
 	
 	public Node() {}
 	
