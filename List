@@ -1,4 +1,9 @@
-
+/**
+* Data Structure, List
+*	@author :Camila chacón
+*	@date 19-03-2019
+*	@version 1
+**/
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -8,20 +13,20 @@ public class List {
 	public Node head = null; //Empty list
 
 	
-	public boolean isEmpty() {
+	public boolean isEmpty() { //check if queue is empty
 		
 		return head == null ? true : false;
 	}
 	
-	public void InsertAtBegin(Node newNode){
+	public void InsertAtBegin(Node newNode){ //push the list 
 		
 		newNode.next = head;
 		head = newNode;
 		
 	}
 	
-	public void InsertAtEnd(Node newNode) {
-		if (isEmpty()) {
+	public void InsertAtEnd(Node newNode) { //insert new node at the end
+		if (isEmpty()) { //Verify 
 			head = newNode;
 		}else {
 			Node temp = head;
@@ -34,12 +39,12 @@ public class List {
 		}
 	}
 	
-	public void InsertAtInedex(Node newNode , int index){
+	public void InsertAtInedex(Node newNode , int index){ //insert in a specific node
 		
 		Node temp;
 		Node pre = head;
 		
-		for (int i = 0; i < index - 1; i++) {
+		for (int i = 0; i < index - 1; i++) { //cycle to the index
 			pre = pre.next;
 		}
 		
@@ -49,7 +54,7 @@ public class List {
 		
 	}
 	
-	public void DeleteAtBegin(){
+	public void DeleteAtBegin(){ //using a temporal variable to catch the node that will be delete
 		
 		Node temp = head;
 		head = head.next;
@@ -58,7 +63,7 @@ public class List {
 		
 	}
 	
-	public void DeleteAtEnd(){
+	public void DeleteAtEnd(){ //delete the node that points to null
 		
 		Node temp;
 		Node Pre = head;
@@ -74,7 +79,7 @@ public class List {
 		
 	}
 	
-	public void DeleteAtIndex(int index) {
+	public void DeleteAtIndex(int index) {//delete a node that the index points
 		
 		Node temp = head;
 		
@@ -89,9 +94,9 @@ public class List {
 		
 	}
 	
-	public void reverse(){
+	public void reverse(){ //the list now will be upside down 
 		
-		Stack tempList = new Stack();
+		Stack tempList = new Stack();  //constructor
 		Node temp = head;
 		
 		while(temp != null) {
@@ -105,7 +110,7 @@ public class List {
 		
 	}
 	
-	public void PrintList() throws IOException {
+	public void PrintList() throws IOException { //print the final list
 		
 		BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
 		
@@ -120,11 +125,12 @@ public class List {
 		bw.close();
 	}
 	
-	public void quickSort() {
+	public void quickSort() { // method to sort
 	
 		if (!isEmpty()) {
-		
-			List leftSet = new List ();
+			
+			//divide the list at two parts
+			List leftSet = new List (); 
 			List rightSet =  new List ();
 
 			Node temp = head.next;
@@ -133,7 +139,7 @@ public class List {
 	
 			while (temp != null){
 			
-				if ( temp.value < pivot.value) //cambiar dependiendo el parametro
+				if ( temp.value < pivot.value) //change depending on the parameter
 				
 				
 					leftSet.InsertAtEnd(temp.clone());
@@ -144,9 +150,10 @@ public class List {
 				
 				temp = temp.next;
 		}
-		
-		leftSet.quickSort();
+			// use recursion until there are single element lists
+		leftSet.quickSort(); 
 		rightSet.quickSort();
+		//join lists
 		pivot.next=rightSet.head;
 		leftSet.InsertAtEnd(pivot);
 		head = leftSet.head;
@@ -154,7 +161,7 @@ public class List {
 	}
 	}
 	
-	public int LenghtList() {
+	public int LenghtList() { // catch the length of the list
 		
 		int counter =0;
 		Node temp=head;
@@ -166,7 +173,7 @@ public class List {
 	}
 	
 	
-	public Node getNode(int index) {
+	public Node getNode(int index) { //catch the number of an specific index
 		
 		if(LenghtList()< index)
 			return null;
@@ -184,24 +191,24 @@ public class List {
 	}
 	
 	public Node binarySearch() {
-		int max = LenghtList(),min =0:
+		int max = LenghtList(); 
+		int min =0;
 		int middle = (max + min)/2;
 		
-		while () {
-			
-		}
+return null;		
 	}
 
 	
 	public static void main(String[] args) throws IOException {
 		
-		List student = new List();
+		List student = new List(); //constructor
+		
 		student.InsertAtBegin(new Node ("Paula", 22, 561556));
 		student.InsertAtEnd(new Node("camila ", 22,2434));
 		student.InsertAtBegin(new Node("Juan", 23,2345676));
 		student.InsertAtInedex(new Node("pepe", 23,2345676), 1);
-		student.DeleteAtBegin();
-		student.DeleteAtEnd();
+
+		student.quickSort();
 		student.PrintList();
 
 		
