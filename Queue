@@ -16,14 +16,14 @@ public class Queue {
 		return head == null ? true : false;
 	}
 
-	public void enquece(Node newNode){ //insert at begin
+	public void enqueue(Node newNode){ //insert at begin
 	
 		newNode.next = head;
 		head = newNode;
 	
 	}
 
-	public Node dequece(){ // Delete at end of queue
+	public Node dequeue(){ // Delete at end of queue
 	
 		Node temp;
 		Node Pre = head;
