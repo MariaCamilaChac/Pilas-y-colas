@@ -1,5 +1,3 @@
-
-
 /**
 * Data Structure, List
 *	@author :Camila chacón
@@ -10,43 +8,46 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class List {
+public class List {//Class List
 	
-	public static Node head = null; //Empty list
-
+	public Node head = null; //Empty list
 	
-	public boolean isEmpty() { //check if queue is empty
+	public boolean isEmpty() {//Method Check if empty
 		
 		return head == null ? true : false;
-	}
+	}//end methoh
 	
-	public void InsertAtBegin(Node newNode){ //push the list 
+	public void insertAtBegin(Node newNode){//Method insert at begin of the list
 		
 		newNode.next = head;
 		head = newNode;
 		
-	}
+	}//end method
 	
-	public void InsertAtEnd(Node newNode) { //insert new node at the end
-		if (isEmpty()) { //Verify 
-			head = newNode;
-		}else {
-			Node temp = head;
-			while(temp.next != null) {	
-				temp = temp.next;
-			}
+	public void insertAtEnd(Node newNode) {//Method insert at end of the list
 		
-			temp.next = newNode;	
-	
+		if(isEmpty()) {
+			
+			head = newNode;	
+			
+		}else{
+			
+		Node temp = head;
+		
+		while(temp.next != null) {
+			
+			temp = temp.next;
 		}
+		temp.next = newNode;	
 	}
+}//end method
 	
-	public void InsertAtInedex(Node newNode , int index){ //insert in a specific node
+	public void inserAtInedex(Node newNode , int index){//Method insert at index of the list
 		
 		Node temp;
 		Node pre = head;
 		
-		for (int i = 0; i < index - 1; i++) { //cycle to the index
+		for (int i = 0; i < index - 1; i++) {
 			pre = pre.next;
 		}
 		
@@ -54,18 +55,18 @@ public class List {
 		newNode.next = temp;
 		pre.next = newNode;
 		
-	}
+	}//end method
 	
-	public void DeleteAtBegin(){ //using a temporal variable to catch the node that will be delete
+	public void deleteAtBegin(){//method delete at begin of the list
 		
 		Node temp = head;
 		head = head.next;
 		temp = null;
 		System.gc();
 		
-	}
+	}//end method
 	
-	public void DeleteAtEnd(){ //delete the node that points to null
+	public void deleteAtEnd(){//method delete at end of the list
 		
 		Node temp;
 		Node Pre = head;
@@ -79,9 +80,9 @@ public class List {
 		temp = null;
 		System.gc();
 		
-	}
+	}//end method
 	
-	public void DeleteAtIndex(int index) {//delete a node that the index points
+	public void deleteAtIndex(int index) {//method delete at index of the list
 		
 		Node temp = head;
 		
@@ -92,13 +93,13 @@ public class List {
 		Node toDelete = temp.next;
 		temp.next = toDelete.next;
 		toDelete = null;
-		System.gc();
+		System.gc();//Call Garbaje collector (destructor)
 		
-	}
+	}//end method
 	
-	public void reverse(){ //the list now will be upside down 
+	public void reverse(){//Method that gets the inverse of a list (Using Clone)
 		
-		Stack tempList = new Stack();  //constructor
+		Stack tempList = new Stack();
 		Node temp = head;
 		
 		while(temp != null) {
@@ -110,101 +111,107 @@ public class List {
 		
 		head = tempList.head;
 		
-	}
+	}//end method
 	
-	public void PrintList() throws IOException { //print the final list
+	public void quickSort() throws IOException {//Sort list by criterion (Quicksort)
+		
+	if(!isEmpty()) {//Check is empty
+		
+		List leftSet = new List();
+		List rightSet = new List();
+		
+		Node pivot = head;
+		Node temp = head.next;
+		
+		while(temp != null)
+		{
+			if(temp.age < pivot.age) {
+				
+				leftSet.insertAtEnd(temp.clone());
+				
+			}else {
+				
+				rightSet.insertAtEnd(temp.clone());
+			}
+			
+			temp = temp.next;
+		}
+		
+		leftSet.quickSort();
+		rightSet.quickSort();
+		
+		pivot.next = rightSet.head;
+		leftSet.insertAtEnd(pivot);
+		head = leftSet.head;
+		
+	}
+}//end method
+	
+	public Node getNode(int index) {//Lineal Search in ths list
+		
+		if(listSize()<index) {
+			return null;
+		}else {
+			
+			Node temp = head;
+			for (int i = 0; i < index; i++) {
+				
+				temp = temp.next;
+				
+			}
+			
+			return temp;
+			
+		}
+		
+	}//end method
+	
+	
+	public int listSize() {//gets List size
+		
+		int counter = 0;
+		Node temp = head;
+		
+		while(temp != null)
+		{
+			
+			counter +=1;
+			temp = temp.next;
+			
+		}
+		
+		return counter;
+		
+	}//end method
+	
+	public void printList() throws IOException {//Method that prints the contents of the list
 		
 		BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
 		
 		Node temp = head;
 		while(temp != null) {
 			
-			bw.write(temp.toString());
+			bw.write(temp.toString()+"\n");
 			temp = temp.next;
 		}
-		
+		bw.write("\n");
 		bw.flush();
-		bw.close();
-	}
-	
-	public void quickSort() { // method to sort
-	
-		if (!isEmpty()) {
-			
-			//divide the list at two parts
-			List leftSet = new List (); 
-			List rightSet =  new List ();
+	}//end method
 
-			Node temp = head.next;
-			Node pivot = temp;	
-		
 	
-			while (temp != null){
-			
-				if ( temp.value < pivot.value) //change depending on the parameter
-				
-				
-					leftSet.InsertAtEnd(temp.clone());
-		
-				else
-				
-					rightSet.InsertAtEnd(temp.clone());
-				
-				temp = temp.next;
-		}
-			// use recursion until there are single element lists
-		leftSet.quickSort(); 
-		rightSet.quickSort();
-		//join lists
-		pivot.next=rightSet.head;
-		leftSet.InsertAtEnd(pivot);
-		head = leftSet.head;
-		
-	}
-	}
-	
-	public static int LenghtList() { // catch the length of the list
-		
-		int counter =0;
-		Node temp=head;
-		while (temp != null) {
-			counter++;
-			temp=temp.next;
-		}
-		return counter;
-	}
-	
-	
-	public static Node getNode(int index) { //catch the number of an specific index
-		
-		if(LenghtList()< index)
-			return null;
-		
-		else {
-			Node temp=head;
-			for (int i = 0; i < index; i++) {
-				temp=temp.next;
-				
-			}
-			return temp;
-			
-		}
-	
-	}
-	
-	public Node binarySearch(int index) {
+	public int binarySearch(int index) {
 		
 		int  inicio = 0;
-		int  finall = LenghtList()-1;
+		int  finall = listSize();
 		int Num=0;
-		Node result;
+		int result;
 		boolean Positive = false ;
 		
 		while(!(Positive) && inicio <=finall ){
 			int mitad = ((inicio + finall)/2);
 			
 			
-			if ( List.getNode(index).age == mitad){
+			if ( getNode(mitad).age == index){
 				Positive = true;
 				Num=mitad;
 			}else
@@ -216,35 +223,51 @@ public class List {
 		
 		}
 		if(Positive)
-			 result.getNode();
+			 System.out.println(result=Num);
 		else
-			result=-1;
+			System.out.println((result=-1) +" not found");
+		
 		
 		return result;
-		 
+				
+	} 
 	
-	}		
-	
-}
+public void Info_Update(String Nombre,int Edad, int ID , int index){//Method insert at index of the list
 		
+		Node pre = head;
 		
-return null;		
-	}
+		for (int i = 0; i < index; i++) {
+			
+			pre = pre.next;
+		}
+		
+		pre.age = Edad;
+		pre.name = Nombre;
+		pre.id = ID;
+		
+	}//end method
 
 	
 	public static void main(String[] args) throws IOException {
 		
-		List student = new List(); //constructor
+		List student = new List();//creation object
 		
-		student.InsertAtBegin(new Node ("Paula", 22, 561556));
-		student.InsertAtEnd(new Node("camila ", 22,2434));
-		student.InsertAtBegin(new Node("Juan", 23,2345676));
-		student.InsertAtInedex(new Node("pepe", 23,2345676), 1);
-
+		//Enter student data
+		student.insertAtBegin(new Node("Danilo" , 19 , 5948));
+		student.insertAtBegin(new Node("camila" , 20 , 8912));
+		student.insertAtBegin(new Node("paula" , 28 , 5920));
+		student.insertAtEnd(new Node("pepe" , 30, 564812));
+		student.inserAtInedex(new Node("pepito", 43 , 1589),2);
+		
 		student.quickSort();
-		student.PrintList();
+
+		student.printList();
+		student.binarySearch(28);
+		
+		student.Info_Update("jhon", 17, 134222, 3);
+		student.printList();
 
 		
-	}
-
+	}//end main method
+	
 }
