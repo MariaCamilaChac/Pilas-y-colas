@@ -1,3 +1,4 @@
+
 /**
 * Data Structure, List
 *	@author :Camila chacón
@@ -8,7 +9,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class List {//Class List
+public class CircularList {//Class List
 	
 	public Node head = null; //Empty list
 	
@@ -29,21 +30,28 @@ public class List {//Class List
 		if(isEmpty()) {
 			
 			head = newNode;	
+			head.next=head;
 			
-		}else{
-			
-		Node temp = head;
-	
-		while(temp.next != head) {
-			
-			temp = temp.next;
 		}
-		temp.next = newNode;
-		newNode.next=head;
+		if (listSize() ==1){
+			
+			head.next=newNode;
+			newNode.next=head;
+			}
+		else{
+			Node temp = head.next;
+	
+		
+			while(temp.next != head) 		
+				temp = temp.next;				
+		
+			temp.next = newNode;
+		
+			newNode.next=head;
 	}
 }//end method
 	
-	public void inserAtIndex(Node newNode , int index){//Method insert at index of the list
+	public void insertAtIndex(Node newNode , int index){//Method insert at index of the list
 		
 		Node temp;
 		Node pre = head;
@@ -61,14 +69,16 @@ public class List {//Class List
 	public void deleteAtBegin(){//method delete at begin of the list
 		
 		Node temp = head;
+		head=head.next;
+		Node pre=head;
 	
 
-		while(temp.next != head) {
+		while(pre.next.next != head) {
 			
-			temp = temp.next;
+			pre = pre.next;
 		}
-		temp=temp.next;
-		head = head.next;
+		pre.next=head;
+		
 		temp = null;
 		System.gc();
 		
@@ -85,7 +95,7 @@ public class List {//Class List
 		}
 		
 		temp = Pre.next;
-		Pre.next = null;
+		Pre.next = head;
 		temp = null;
 		System.gc();
 		
@@ -271,7 +281,7 @@ public void CicleList() {
 		student.insertAtBegin(new Node("camila" , 20 , 8912));
 		student.insertAtBegin(new Node("paula" , 28 , 5920));
 		student.insertAtEnd(new Node("pepe" , 30, 564812));
-		student.inserAtIndex(new Node("pepito", 43 , 1589),2);
+		student.insertAtIndex(new Node("pepito", 43 , 1589),2);
 		
 		student.quickSort();
 
