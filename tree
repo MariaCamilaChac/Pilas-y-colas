@@ -1,0 +1,48 @@
+
+public class Tree{
+	
+	Node_Tree root =null;
+	
+	
+	public void Insert(Node_Tree newNode) {
+		if (root == null) 
+			root=newNode;
+		else {
+			
+			Node_Tree temp = root;
+			Node_Tree parent = root;
+			
+			while(temp != null) {
+				if (temp.value<newNode.value)
+					temp= temp.Tree_rigth;
+				else
+					temp=temp.Tree_left;
+			}
+			if (parent.value < newNode.value) 
+				parent.Tree_rigth=newNode;
+			else 
+				parent.Tree_left=newNode;
+		
+		}
+	}
+	
+	public Node_Tree search (int value) {
+		
+		Node_Tree temp= root;
+		
+		while (root != null) {
+			
+			if(temp.value==value) {
+		
+				break;
+			}
+			if (temp.value < value) 
+				temp = temp.Tree_left;
+			
+			else
+				temp = temp.Tree_rigth;
+		}
+		return temp;
+	}
+
+}
