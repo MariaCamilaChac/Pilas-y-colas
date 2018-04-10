@@ -1,3 +1,4 @@
+package arbol;
 
 public class Tree{
 	
@@ -26,7 +27,28 @@ public class Tree{
 		}
 	}
 	
-	public Node_Tree search (int value) {
+	public void Delete(int Node){
+		
+		Node_Tree temp= root;	
+		Node_Tree Value=Search(Node);
+		
+		
+		if(Value.Tree_left != null && Value.Tree_rigth != null){
+			do{	 
+			temp = temp.Tree_left;
+			}while (temp.Tree_left==null);
+			
+		}else
+			if(Value.Tree_left == null && Value.Tree_rigth == null){
+				Value=null;
+				System.gc();
+			}
+
+		
+		
+	}
+	
+	public Node_Tree Search (int value) {
 		
 		Node_Tree temp= root;
 		
