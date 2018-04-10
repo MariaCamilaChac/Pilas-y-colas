@@ -116,55 +116,9 @@ public class CircularList {//Class List
 		
 	}//end method
 	
-	public void reverse(){//Method that gets the inverse of a list (Using Clone)
-		
-		Stack tempList = new Stack();
-		Node temp = head;
-		
-		while(temp != null) {
-			
-			tempList.Push(temp.clone());
-			temp = temp.next;
-			
-		}
-		
-		head = tempList.head;
-		
-	}//end method
+
 	
-	public void quickSort() throws IOException {//Sort list by criterion (Quicksort)
-		
-	if(!isEmpty()) {//Check is empty
-		
-		List leftSet = new List();
-		List rightSet = new List();
-		
-		Node pivot = head;
-		Node temp = head.next;
-		
-		while(temp != null)
-		{
-			if(temp.age < pivot.age) {
-				
-				leftSet.insertAtEnd(temp.clone());
-				
-			}else {
-				
-				rightSet.insertAtEnd(temp.clone());
-			}
-			
-			temp = temp.next;
-		}
-		
-		leftSet.quickSort();
-		rightSet.quickSort();
-		
-		pivot.next = rightSet.head;
-		leftSet.insertAtEnd(pivot);
-		head = leftSet.head;
-		
-	}
-}//end method
+
 	
 	public Node getNode(int index) {//Lineal Search in ths list
 		
@@ -218,58 +172,7 @@ public class CircularList {//Class List
 	}//end method
 
 	
-	public int binarySearch(int index) {
-		
-		int  inicio = 0;
-		int  finall = listSize();
-		int Num=0;
-		int result;
-		boolean Positive = false ;
-		
-		while(!(Positive) && inicio <=finall ){
-			int mitad = ((inicio + finall)/2);
-			
-			
-			if ( getNode(mitad).age == index){
-				Positive = true;
-				Num=mitad;
-			}else
-				if(index < getNode(mitad).age)
-					finall=mitad-1;
-				 else
-					if(index > getNode(mitad).age)
-					inicio= mitad+1;	
-		
-		}
-		if(Positive)
-			 System.out.println(result=Num);
-		else
-			System.out.println((result=-1) +" not found");
-		
-		
-		return result;
-				
-	} 
-	
-public void Info_Update(String Nombre,int Edad, int ID , int index){//Method insert at index of the list
-		
-		Node pre = head;
-		
-		for (int i = 0; i < index; i++) {
-			
-			pre = pre.next;
-		}
-		
-		pre.age = Edad;
-		pre.name = Nombre;
-		pre.id = ID;
-		
-	}//end method
 
-public void CicleList() {
-	
-
-}
 
 	
 	public static void main(String[] args) throws IOException {
@@ -281,7 +184,7 @@ public void CicleList() {
 		student.insertAtBegin(new Node("camila" , 20 , 8912));
 		student.insertAtBegin(new Node("paula" , 28 , 5920));
 		student.insertAtEnd(new Node("pepe" , 30, 564812));
-		student.insertAtIndex(new Node("pepito", 43 , 1589),2);
+		((CircularList) student).insertAtIndex(new Node("pepito", 43 , 1589),2);
 		
 		student.quickSort();
 
