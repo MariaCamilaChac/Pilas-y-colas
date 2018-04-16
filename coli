@@ -39,15 +39,18 @@ public class CircularList {//Class List
 			newNode.next=head;
 			}
 		else{
-			Node temp = head.next;
-	
-		
-			while(temp.next != head) 		
-				temp = temp.next;				
-		
-			temp.next = newNode;
-		
-			newNode.next=head;
+			if(listSize() >1){
+				Node temp = head.next;
+				
+				
+				while(temp.next != head) 		
+					temp = temp.next;				
+			
+				temp.next = newNode;
+			
+				newNode.next=head;
+			}
+			
 	}
 }//end method
 	
@@ -70,18 +73,16 @@ public class CircularList {//Class List
 		
 		Node temp = head;
 		head=head.next;
-		Node pre=head;
-	
+		Node pre=head.next;
 
-		while(pre.next.next != head) {
-			
+		while(pre.next != head){
 			pre = pre.next;
 		}
+	
 		pre.next=head;
 		
 		temp = null;
-		System.gc();
-		
+		System.gc();		
 		
 	}//end method
 	
@@ -90,7 +91,7 @@ public class CircularList {//Class List
 		Node temp;
 		Node Pre = head;
 		
-		while(Pre.next.next != null) {
+		while(Pre.next.next != head) {
 			Pre = Pre.next;
 		}
 		
@@ -124,10 +125,10 @@ public class CircularList {//Class List
 		
 		if(listSize()<index) {
 			return null;
-		}else {
+		}else { 
 			
 			Node temp = head;
-			for (int i = 0; i < index; i++) {
+			for (int i = 0 ; i < index; i++) {
 				
 				temp = temp.next;
 				
@@ -177,22 +178,18 @@ public class CircularList {//Class List
 	
 	public static void main(String[] args) throws IOException {
 		
-		List student = new List();//creation object
+		CircularList student = new CircularList();//creation object
 		
 		//Enter student data
 		student.insertAtBegin(new Node("Danilo" , 19 , 5948));
 		student.insertAtBegin(new Node("camila" , 20 , 8912));
 		student.insertAtBegin(new Node("paula" , 28 , 5920));
-		student.insertAtEnd(new Node("pepe" , 30, 564812));
-		((CircularList) student).insertAtIndex(new Node("pepito", 43 , 1589),2);
-		
-		student.quickSort();
 
 		student.printList();
-		student.binarySearch(28);
 		
-		student.Info_Update("jhon", 17, 134222, 3);
+		student.deleteAtIndex(2);
 		student.printList();
+	
 
 		
 	}//end main method
