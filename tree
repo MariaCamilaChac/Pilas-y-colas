@@ -1,9 +1,11 @@
-
+package arbol;
 
 public class Tree{
+	public Tree(){}
 	
 	
 	Node_Tree root =null;
+	
 	
 	public boolean isEmpty() {
 		return root == null? true : false;
@@ -48,20 +50,24 @@ public class Tree{
 	
 	public void Delete(int value){
 		
-		Node_Tree temp = root;
-		Node_Tree parent = root;
+		Node_Tree temp= root;
 		
-		while(temp != null) {
-			parent = temp;
-			if (temp.value<value)
-				temp= temp.Tree_rigth;
+		while (temp != null) {
+			
+			if(temp.value==value) {
+		
+				break;
+			}
+			if (value < temp.value) 
+				temp = temp.Tree_left;
 			
 			else
-				temp=temp.Tree_left;
+				temp = temp.Tree_rigth;
 		}
-		
-		
-		
+		if(temp==null){
+			System.out.println("this value doesn't exist");
+		}
+		Node_Tree parent=root; 
 		if(isLeaf(temp)) {
 			temp=null;
 			if(value < parent.value) 
@@ -72,28 +78,44 @@ public class Tree{
 		}
 			else {
 				if(oneChild(temp)) {
+					
 					if(temp.Tree_left != null) {
+						
 						if(value < parent.value)
 							parent.Tree_left = temp.Tree_left;
+						else
+							parent.Tree_rigth=temp.Tree_left;
+					}
+					else{
+						if(value < parent.value)
+							parent.Tree_left = temp.Tree_rigth;
 						else
 							parent.Tree_rigth=temp.Tree_rigth;
 					}
 					temp=null;
 				}
+				
 				else {
+					
 					Node_Tree temp2 = temp.Tree_rigth;
+					
 					if(temp2.Tree_left==null){
+						
 						temp2.Tree_left=temp.Tree_left;
-						if(value.)
+						
+						if(value < parent.value)
+							parent.Tree_left = temp2;
+						else
+							parent.Tree_rigth=temp2;
 					} 
 						
-					}
+					
 				}
-	
+				
 			}
-	}
-		
 	
+			
+	}
 	
 	
 	public Node_Tree Search (int value) {
@@ -115,45 +137,52 @@ public class Tree{
 		return temp;
 	}
 	
+	
 	public void Preorder(Node_Tree node) {
 		if(node != null) {
-			System.out.println(node.toString());
+			System.out.println(node.value+ " ");
 			Preorder(node.Tree_left);
 			Preorder(node.Tree_rigth);
-			System.out.println(node.toString()+" ");
+
 		}
 	}
+	
 	
 	public void Postorder(Node_Tree node) {
 		if(node != null) {
 			
 			Postorder(node.Tree_left);
 			Postorder(node.Tree_rigth);
-			System.out.println(node.toString()+" ");
+			System.out.println(node.value+" ");
 		}
 	}
+	
 	
 	public void Inorder(Node_Tree node) {
 		if(node != null) {
 			
-			Preorder(node.Tree_left);
-			System.out.println(node.toString()+" ");
-			Preorder(node.Tree_rigth);
+			Inorder(node.Tree_left);
+			System.out.println(node.value+" ");
+			Inorder(node.Tree_rigth);
 			
 		}
 	}
 	
 
 	public static void main(String[] args) {
-
 		Tree testTree = new Tree();
-		testTree.Insert(3);
+		testTree.Insert(2);
 		testTree.Insert(4);
 		testTree.Insert(32);
 		testTree.Insert(1);
 		System.out.println(" pre \n");
 		testTree.Preorder(testTree.root);
+		System.out.println(" in \n");
+		testTree.Inorder(testTree.root);
 		
+		testTree.Delete(4);
+		System.out.println("\n");
+		testTree.Inorder(testTree.root);
 		
 	}
 
