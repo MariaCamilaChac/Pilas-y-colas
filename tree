@@ -1,5 +1,3 @@
-package arbol;
-
 public class Tree{
 	public Tree(){}
 	
@@ -166,6 +164,30 @@ public class Tree{
 			Inorder(node.Tree_rigth);
 			
 		}
+	}
+	public void simpleRLeft() {
+		while() {|
+			Node_Tree temp=Parent();
+		}
+	}
+	
+	public void Parent() {
+		
+		while() {
+			
+		}
+		
+	}
+	
+	public void balance(Node_Tree node) {
+		
+		if(node != null) {
+			Node_Tree temp= root;
+			
+			
+			
+		}
+		
 	}
 	
 
