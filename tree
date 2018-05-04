@@ -1,3 +1,5 @@
+package arbol;
+
 public class Tree{
 	public Tree(){}
 	
@@ -165,30 +167,6 @@ public class Tree{
 			
 		}
 	}
-	public void simpleRLeft() {
-		while() {|
-			Node_Tree temp=Parent();
-		}
-	}
-	
-	public void Parent() {
-		
-		while() {
-			
-		}
-		
-	}
-	
-	public void balance(Node_Tree node) {
-		
-		if(node != null) {
-			Node_Tree temp= root;
-			
-			
-			
-		}
-		
-	}
 	
 
 	public static void main(String[] args) {
@@ -197,11 +175,14 @@ public class Tree{
 		testTree.Insert(4);
 		testTree.Insert(32);
 		testTree.Insert(1);
-		System.out.println(" pre \n");
+		System.out.println(" preorder \n");
 		testTree.Preorder(testTree.root);
-		System.out.println(" in \n");
+		System.out.println();
+		System.out.println(" inorder \n");
 		testTree.Inorder(testTree.root);
-		
+		System.out.println();
+		System.out.println("Postorder");
+		testTree.Postorder(testTree.root);
 		testTree.Delete(4);
 		System.out.println("\n");
 		testTree.Inorder(testTree.root);
