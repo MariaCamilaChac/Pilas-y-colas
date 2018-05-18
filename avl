@@ -175,7 +175,7 @@ public class AVLTree{
 			return root;
 		else {
 			Node temp = root;
-			Node parent;
+			Node parent = null;
 			while(temp != null) {
 				
 				if(node.value== temp.value)
@@ -193,22 +193,22 @@ public class AVLTree{
 			if (temp == null)
 				parent = null;
 			
+			return parent;
 		}
 		
-		
-		return parent();
+	
 		
 	}
 	
-	public int nodeHeigth(Node node){
+	public int nodeHeight(Node node){
 		
 		if (isLeaf(node)) 
 			return 0;
 		
 		else{
 		
-			return nodeHeigth(node.Tree_left)> nodeHeigth(node.Tree_rigth)?
-					nodeHeigth(node.Tree_left)+1: nodeHeigth(node.Tree_rigth)+1;
+			return nodeHeight(node.Tree_left)> nodeHeight(node.Tree_rigth)?
+					nodeHeight(node.Tree_left)+1: nodeHeight(node.Tree_rigth)+1;
 		}
 			
 			
@@ -217,10 +217,18 @@ public class AVLTree{
 	
 	public int unblalance_factor(Node node) {
 		
-		return nodeHeigth(node.Tree_left)- nodeHeigth(node.Tree_left);
+		return nodeHeight(node.Tree_left)- nodeHeight(node.Tree_left);
 	}
 	
 	public void left_rotation(Node node) {
 		
+		Node izq= node.Tree_rigth;
+		Node temp= izq.Tree_left;
+		
+		izq.Tree_left=node;
+		node.Tree_rigth=temp;
+		
+		nodeHeight(node);
 	}
+	
 }
