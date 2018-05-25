@@ -1,0 +1,47 @@
+
+public class SucessorFunction {
+
+	public SucessorFunction() {}
+	
+	public Node listTrikiSucessor(Node currentBoard, int symbol) {
+		Node head = null;
+		
+		Node temp = null;
+		
+		for(int i = 0 ; i < 3 ; i++) {
+			
+			for(int j = 0 ; j < 3 ; j++) {
+				if (currentBoard.board[i][j] == 0 ) {
+					
+					Node newSucessor = currentBoard.clone();
+					newSucessor.board [i][j] = symbol;
+					
+					if(head == null) {
+						head = newSucessor;
+						temp = head;
+					}else {
+						temp.Next= newSucessor;
+					temp = temp.Next;
+				
+					}
+				}
+			}
+		
+		}
+		return head;
+	
+	}
+	
+	public static void main(String[] args) {
+		
+		SucessorFunction suc = new SucessorFunction();
+			Node board = new Node(new int[3][3]);
+			Node head = suc.listTrikiSucessor(board, 2);
+			Node temp = head;
+			while (temp != null) {
+				System.out.println(temp.toString()+"\n");
+				temp = temp.Next;
+		}
+	}
+
+}
